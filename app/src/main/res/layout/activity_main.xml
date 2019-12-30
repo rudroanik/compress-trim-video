@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity"
+    android:orientation="vertical">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:layout_weight="0.34"
+        android:background="#4CAF50"
+        android:onClick="openGallery"
+        android:text="Select Video From Gallery"
+        android:textAllCaps="false"
+        android:textColor="#fff" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:layout_weight="0.34"
+        android:background="@color/colorAccent"
+        android:onClick="openCustomGallery"
+        android:text="Select video from custom gallery"
+        android:textAllCaps="false"
+        android:textColor="#fff" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:layout_weight="0.34"
+        android:background="#F44336"
+        android:onClick="captureVideo1"
+        android:text="Capture 10 second video"
+        android:textAllCaps="false"
+        android:textColor="#fff" />
+
+</LinearLayout>
