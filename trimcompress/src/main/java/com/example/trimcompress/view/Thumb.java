@@ -100,6 +100,8 @@ public class Thumb {
             th.setIndex(i);
             if (i == 0) {
                 int resImageLeft = R.drawable.apptheme_text_select_handle_left;
+
+
                 th.setBitmap(BitmapFactory.decodeResource(resources, resImageLeft));
             } else {
                 int resImageRight = R.drawable.apptheme_text_select_handle_right;

@@ -33,4 +33,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation files('libs/isoparser-1.0.6.jar')
     implementation files('libs/aspectjrt-1.7.3.jar')
+    configurations.all {
+        resolutionStrategy.force 'com.android.support:support-v4:24.0.0'
+    }
 }

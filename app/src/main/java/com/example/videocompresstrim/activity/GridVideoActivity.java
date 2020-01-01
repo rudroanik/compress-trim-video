@@ -1,5 +1,6 @@
 package com.example.videocompresstrim.activity;
 
+
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -19,17 +20,18 @@ import java.util.HashSet;
 
 public class GridVideoActivity extends AppCompatActivity {
 
-    private GridView galleryVideo;
     private ArrayList<String> videos;
 
     GridVideoAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grid_video);
-        galleryVideo = findViewById(R.id.gridViewID);
+        GridView galleryVideo = findViewById(R.id.gridViewID);
         videos = new ArrayList<>();
+
         videos = getAllMedia();
         adapter = new GridVideoAdapter(GridVideoActivity.this, videos);
         galleryVideo.setAdapter(adapter);
@@ -53,16 +55,21 @@ public class GridVideoActivity extends AppCompatActivity {
         String[] projection = {MediaStore.Video.VideoColumns.DATA, MediaStore.Video.Media.DISPLAY_NAME};
         Cursor cursor = getContentResolver().query(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, projection, null, null, null);
         try {
-            cursor.moveToFirst();
-            do {
-                videoItemHashSet.add((cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DATA))));
-            } while (cursor.moveToNext());
+            if (cursor != null) {
+                cursor.moveToFirst();
+            }
+            if (cursor != null) {
+                do {
+                    videoItemHashSet.add((cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DATA))));
+                } while (cursor.moveToNext());
+            }
 
-            cursor.close();
+            if (cursor != null) {
+                cursor.close();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        ArrayList<String> downloadedList = new ArrayList<>(videoItemHashSet);
-        return downloadedList;
+        return new ArrayList<>(videoItemHashSet);
     }
 }

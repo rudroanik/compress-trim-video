@@ -29,9 +29,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void captureVideo1(View view) {
+    public void captureVideo(View view) {
         if (ReadExternalStoragePermission.isReadStoragePermissionGranted(this)) {
             startActivity(new Intent(MainActivity.this, VideoRecoderActivity.class));
         }
     }
+
+
 }

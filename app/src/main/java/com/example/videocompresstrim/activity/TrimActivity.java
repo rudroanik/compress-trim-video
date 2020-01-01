@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -32,6 +31,7 @@ public class TrimActivity extends AppCompatActivity implements OnTrimVideoListen
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Trimming in Progress");
         if (getIntent() != null) {
+
             String videoPath = getIntent().getExtras().getString("video");
 
             videoTrimmer.setMaxDuration(1000);
@@ -40,7 +40,6 @@ public class TrimActivity extends AppCompatActivity implements OnTrimVideoListen
             videoTrimmer.setVideoURI(Uri.parse(videoPath));
             videoTrimmer.setVideoInformationVisibility(true);
         }
-
     }
 
     @Override
@@ -51,16 +50,12 @@ public class TrimActivity extends AppCompatActivity implements OnTrimVideoListen
     @Override
     public void onTrimStarted() {
         progressDialog.show();
-
     }
-
     @Override
     public void getResult(Uri uri) {
 
-        new VideoCompressAsyncTask().execute(uri.getPath(), Environment.getExternalStorageDirectory().toString());
-
+        new VideoCompressAsyncTask().execute(uri.getPath(), getExternalFilesDir(null).getAbsolutePath());
     }
-
     @Override
     public void cancelAction() {
         videoTrimmer.destroy();
@@ -100,4 +95,5 @@ public class TrimActivity extends AppCompatActivity implements OnTrimVideoListen
         }
 
     }
+
 }

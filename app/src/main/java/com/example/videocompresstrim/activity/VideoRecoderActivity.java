@@ -33,7 +33,6 @@ public class VideoRecoderActivity extends AppCompatActivity {
     private TextView textView;
     private RelativeLayout relativeLayout;
     private ProgressDialog progressDialog;
-    private String realPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,14 +65,14 @@ public class VideoRecoderActivity extends AppCompatActivity {
             if (data != null) {
                 Uri uri = data.getData();
 
-                realPath = FilePath.getPath(this, uri);
+                String realPath = FilePath.getPath(this, uri);
 
                 relativeLayout.setVisibility(View.VISIBLE);
                 Glide.with(this).load(getImageThumbnail(this, uri)).placeholder(R.drawable.no_video).into(imageView);
                 textView.setText(VideoDuration.convertMillieToHMmSs(VideoDuration.getDuration(this, uri)));
                 progressDialog.setMessage("Please wait");
                 progressDialog.show();
-                new VideoCompressor().execute();
+                new VideoCompressor().execute(realPath,getExternalFilesDir(null).getAbsolutePath());
 
             }
 
@@ -92,7 +91,7 @@ public class VideoRecoderActivity extends AppCompatActivity {
             if (cursor != null) {
                 cursor.moveToFirst();
             }
-            return cursor.getString(column_index);
+            return cursor != null ? cursor.getString(column_index) : null;
         } finally {
             if (cursor != null) {
                 cursor.close();

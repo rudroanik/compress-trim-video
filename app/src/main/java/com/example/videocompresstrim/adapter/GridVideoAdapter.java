@@ -1,5 +1,7 @@
 package com.example.videocompresstrim.adapter;
 
+
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +22,9 @@ public class GridVideoAdapter extends BaseAdapter {
     public GridVideoAdapter(Activity localContext, ArrayList<String> videos) {
         context = localContext;
         this.videos = videos;
-
-
     }
+
+
 
     public int getCount() {
         return videos.size();
@@ -43,6 +45,7 @@ public class GridVideoAdapter extends BaseAdapter {
         ImageView imageView;
 
 
+        @SuppressLint("ViewHolder")
         View view = LayoutInflater.from(context).inflate(R.layout.item_grid_video, parent, false);
 
         imageView = view.findViewById(R.id.videoThumbnailIVID);
