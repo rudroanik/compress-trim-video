@@ -1,5 +1,6 @@
 package com.example.videocompresstrim.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -57,6 +58,7 @@ public class VideoFromGalleryActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

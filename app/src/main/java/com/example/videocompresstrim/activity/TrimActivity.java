@@ -17,6 +17,7 @@ import com.example.videocompresstrim.R;
 
 import java.net.URISyntaxException;
 
+
 public class TrimActivity extends AppCompatActivity implements OnTrimVideoListener, OnK4LVideoListener {
 
     private K4LVideoTrimmer videoTrimmer;
@@ -54,7 +55,7 @@ public class TrimActivity extends AppCompatActivity implements OnTrimVideoListen
     @Override
     public void getResult(Uri uri) {
 
-        new VideoCompressAsyncTask().execute(uri.getPath(), getExternalFilesDir(null).getAbsolutePath());
+        new VideoCompressAsyncTask().execute(uri.getPath(),getExternalFilesDir(null).getAbsolutePath());
     }
     @Override
     public void cancelAction() {

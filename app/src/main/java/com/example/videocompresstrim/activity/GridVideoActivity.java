@@ -52,7 +52,10 @@ public class GridVideoActivity extends AppCompatActivity {
 
     public ArrayList<String> getAllMedia() {
         HashSet<String> videoItemHashSet = new HashSet<>();
-        String[] projection = {MediaStore.Video.VideoColumns.DATA, MediaStore.Video.Media.DISPLAY_NAME};
+        final String column = "_data";
+        final String[] projection = {
+                column
+        };
         Cursor cursor = getContentResolver().query(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, projection, null, null, null);
         try {
             if (cursor != null) {
@@ -60,7 +63,7 @@ public class GridVideoActivity extends AppCompatActivity {
             }
             if (cursor != null) {
                 do {
-                    videoItemHashSet.add((cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DATA))));
+                    videoItemHashSet.add((cursor.getString(cursor.getColumnIndexOrThrow(column))));
                 } while (cursor.moveToNext());
             }
 

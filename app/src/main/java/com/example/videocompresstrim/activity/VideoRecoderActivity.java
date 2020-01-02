@@ -2,9 +2,7 @@ package com.example.videocompresstrim.activity;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -24,8 +22,9 @@ import com.example.trimcompress.SiliCompressor;
 import com.example.videocompresstrim.R;
 import com.example.videocompresstrim.util.FilePath;
 import com.example.videocompresstrim.util.VideoDuration;
-
 import java.net.URISyntaxException;
+import java.util.Objects;
+
 
 public class VideoRecoderActivity extends AppCompatActivity {
 
@@ -68,34 +67,16 @@ public class VideoRecoderActivity extends AppCompatActivity {
                 String realPath = FilePath.getPath(this, uri);
 
                 relativeLayout.setVisibility(View.VISIBLE);
-                Glide.with(this).load(getImageThumbnail(this, uri)).placeholder(R.drawable.no_video).into(imageView);
+                Glide.with(this).load(uri).placeholder(R.drawable.no_video).into(imageView);
+
+
                 textView.setText(VideoDuration.convertMillieToHMmSs(VideoDuration.getDuration(this, uri)));
                 progressDialog.setMessage("Please wait");
                 progressDialog.show();
-                new VideoCompressor().execute(realPath,getExternalFilesDir(null).getAbsolutePath());
+                new VideoCompressor().execute(realPath, Objects.requireNonNull(getExternalFilesDir(null)).getAbsolutePath());
 
             }
 
-        }
-    }
-
-    public String getImageThumbnail(Context context, Uri contentUri) {
-        Cursor cursor = null;
-        try {
-            String[] proj = {MediaStore.Images.Media.DATA};
-            cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
-            int column_index = 0;
-            if (cursor != null) {
-                column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            }
-            if (cursor != null) {
-                cursor.moveToFirst();
-            }
-            return cursor != null ? cursor.getString(column_index) : null;
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
         }
     }
 
