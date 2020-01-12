@@ -33,16 +33,24 @@ public class VideoFromGalleryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_video_from_gallery);
         videoView = findViewById(R.id.GalleryViewVideoID);
         trimButton = findViewById(R.id.trimBtnID);
-        try {
-            Intent intent = new Intent();
-            intent.setTypeAndNormalize("video/*");
-            intent.setAction(Intent.ACTION_GET_CONTENT);
 
-            startActivityForResult(Intent.createChooser(intent, "Select Video"), 2);
-        } catch (Exception e) {
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        if (getIntent().getBooleanExtra("fromGridVideo",false) == true){
+            videoView.setVideoURI(Uri.parse(getIntent().getStringExtra("videoUrl")));
+            videoView.start();
+            trimButton.setVisibility(View.GONE);
+        }else {
+            try {
+                Intent intent = new Intent();
+                intent.setTypeAndNormalize("video/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
 
+                startActivityForResult(Intent.createChooser(intent, "Select Video"), 2);
+            } catch (Exception e) {
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
         }
+
 
         trimButton.setOnClickListener(new View.OnClickListener() {
             @Override

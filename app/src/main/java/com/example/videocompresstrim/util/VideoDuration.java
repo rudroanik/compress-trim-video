@@ -1,5 +1,6 @@
 package com.example.videocompresstrim.util;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.database.Cursor;
 import android.net.Uri;
@@ -19,6 +20,7 @@ public class VideoDuration {
         return duration;
     }
 
+    @SuppressLint("DefaultLocale")
     public static String convertMillieToHMmSs(long millie) {
         long seconds = (millie / 1000);
         long second = seconds % 60;

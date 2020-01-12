@@ -1,6 +1,7 @@
 package com.example.videocompresstrim.activity;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -11,10 +12,12 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import com.example.videocompresstrim.R;
 import com.example.videocompresstrim.adapter.GridVideoAdapter;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -41,10 +44,12 @@ public class GridVideoActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(videos.get(position)));
-                intent.setDataAndType(Uri.parse(videos.get(position)), "video/mp4");
-                startActivity(intent);
+               /* Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(videos.get(position)));
+                startActivity(intent);*/
 
+                startActivity(new Intent(GridVideoActivity.this,VideoFromGalleryActivity.class)
+                        .putExtra("videoUrl",videos.get(position))
+                .putExtra("fromGridVideo",true));
             }
         });
 
@@ -53,10 +58,8 @@ public class GridVideoActivity extends AppCompatActivity {
     public ArrayList<String> getAllMedia() {
         HashSet<String> videoItemHashSet = new HashSet<>();
         final String column = "_data";
-        final String[] projection = {
-                column
-        };
-        Cursor cursor = getContentResolver().query(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, projection, null, null, null);
+
+        Cursor cursor = getContentResolver().query(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, null, null, null, null);
         try {
             if (cursor != null) {
                 cursor.moveToFirst();

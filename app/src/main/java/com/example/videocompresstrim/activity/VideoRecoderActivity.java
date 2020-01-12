@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -106,9 +107,7 @@ public class VideoRecoderActivity extends AppCompatActivity {
         protected void onPostExecute(final String compressedFilePath) {
             super.onPostExecute(compressedFilePath);
             progressDialog.dismiss();
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(compressedFilePath));
-            intent.setDataAndType(Uri.parse(compressedFilePath), "video/mp4");
-            startActivity(intent);
+            Toast.makeText(VideoRecoderActivity.this, "Compressed Successfull", Toast.LENGTH_SHORT).show();
         }
     }
 }
