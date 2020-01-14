@@ -2,18 +2,24 @@ package com.example.videocompresstrim.activity;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.ContentProvider;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CancellationSignal;
 import android.provider.MediaStore;
+import android.util.Size;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +29,8 @@ import com.example.trimcompress.SiliCompressor;
 import com.example.videocompresstrim.R;
 import com.example.videocompresstrim.util.FilePath;
 import com.example.videocompresstrim.util.VideoDuration;
+
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Objects;
 
@@ -44,6 +52,8 @@ public class VideoRecoderActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle(null);
         progressDialog.setCancelable(false);
+
+
     }
 
     public void captureVideo(View view) {
@@ -74,7 +84,7 @@ public class VideoRecoderActivity extends AppCompatActivity {
                 textView.setText(VideoDuration.convertMillieToHMmSs(VideoDuration.getDuration(this, uri)));
                 progressDialog.setMessage("Please wait");
                 progressDialog.show();
-                new VideoCompressor().execute(realPath, Objects.requireNonNull(getExternalFilesDir(null)).getAbsolutePath());
+                new VideoCompressor().execute(realPath, getExternalFilesDir(null).getAbsolutePath());
 
             }
 
@@ -103,6 +113,7 @@ public class VideoRecoderActivity extends AppCompatActivity {
             return filePath;
         }
 
+
         @Override
         protected void onPostExecute(final String compressedFilePath) {
             super.onPostExecute(compressedFilePath);
@@ -110,4 +121,5 @@ public class VideoRecoderActivity extends AppCompatActivity {
             Toast.makeText(VideoRecoderActivity.this, "Compressed Successfull", Toast.LENGTH_SHORT).show();
         }
     }
+
 }

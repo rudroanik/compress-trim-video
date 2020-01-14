@@ -24,7 +24,6 @@ import java.util.HashSet;
 public class GridVideoActivity extends AppCompatActivity {
 
     private ArrayList<String> videos;
-
     GridVideoAdapter adapter;
 
 

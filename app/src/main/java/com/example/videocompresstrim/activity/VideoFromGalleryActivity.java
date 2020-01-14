@@ -2,9 +2,11 @@ package com.example.videocompresstrim.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -79,8 +81,14 @@ public class VideoFromGalleryActivity extends AppCompatActivity {
                 videoView.start();
                 tmpPath = FilePath.getPath(this, uri);
 
-                if (VideoDuration.getDuration(VideoFromGalleryActivity.this, data.getData()) > 10) {
+                //Video duration in millisecond
+                MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+                retriever.setDataSource(VideoFromGalleryActivity.this, data.getData());
+                String time = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
+                long timeInMillisec = Long.parseLong(time );
+                Log.d("Duration", "onActivityResult: "+timeInMillisec);
 
+                if (timeInMillisec > 10000) {
                     isLessThenTenSecond = false;
 
                 } else {

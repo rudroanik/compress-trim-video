@@ -264,7 +264,7 @@ public void scheduleVideoConvert(String path, File dest) {
      * @param outBitrate the target bitrate of the converted video, 0 is default
      * @return
      */
-    @TargetApi(16)
+
     public boolean  convertVideo(final String sourcePath, File destDir, int outWidth, int outHeight, int outBitrate) {
         this.path=sourcePath;
 

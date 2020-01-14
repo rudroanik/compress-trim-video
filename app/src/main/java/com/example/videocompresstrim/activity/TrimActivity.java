@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -89,10 +91,7 @@ public class TrimActivity extends AppCompatActivity implements OnTrimVideoListen
         protected void onPostExecute(final String compressedFilePath) {
             super.onPostExecute(compressedFilePath);
             progressDialog.dismiss();
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(compressedFilePath));
-            intent.setDataAndType(Uri.parse(compressedFilePath), "video/mp4");
-            startActivity(intent);
-            finish();
+            Toast.makeText(TrimActivity.this, "Trim successfull", Toast.LENGTH_SHORT).show();
         }
 
     }

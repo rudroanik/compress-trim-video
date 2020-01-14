@@ -30,11 +30,6 @@ import java.util.Locale;
 
 
 
-/**
- * @author Toure, Akah L
- * @version 1.1.1
- * Created by Toure on 28/03/2016.
- */
 public class SiliCompressor {
 
     private static final String LOG_TAG = SiliCompressor.class.getSimpleName();

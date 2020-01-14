@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Video compress &amp; trim</string>
-    <string name="select_video_from_gallery">Select Video From Gallery</string>
-    <string name="select_video_from_custom_gallery">Select video from custom gallery</string>
+    <string name="select_video_from_gallery">Video From Gallery</string>
+    <string name="select_video_from_custom_gallery">Video from custom gallery</string>
     <string name="capture_10_second_video">Capture 10 second video</string>
     <string name="trim_video">Trim Video</string>
     <string name="_01_10">01:10</string>
@@ -9,5 +9,7 @@
     <string name="placeholder_image">placeholder image</string>
     <string name="no_video">no video</string>
     <string name="video_camera_sign">video camera sign</string>
+    <string name="select_option">Select Option</string>
+    <string name="close_button">close button</string>
 
 </resources>
